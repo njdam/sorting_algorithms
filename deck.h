@@ -1,7 +1,16 @@
 #ifndef DECK_H
 #define DECK_H
 
-ypedef enum kind_e
+#include <stdlib.h>
+
+/**
+ * enum kind_e - is a structure for a numeration of card suits;
+ * @SPADE: is a suit for a spade;
+ * @HEART: is a suit for a heart;
+ * @CLUB: is a suit for a club;
+ * @DIAMOND: is a suit for a diamond;
+ */
+typedef enum kind_e
 {
 	SPADE = 0,
 	      HEART,
