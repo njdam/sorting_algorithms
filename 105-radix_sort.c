@@ -26,26 +26,23 @@ int get_max(int *array, int size)
  * @array: is an array of integers to be sorted using radix algorithm;
  * @size: is a size of an array to be sorted;
  * @expo: is an exponent for a significant digit;
+ * @buffer: is a pointer to a buffer of an integers;
  *
  * Return: nothing.
  */
-void sort_counter(int *array, size_t size, int expo)
+void sort_counter(int *array, size_t size, int expo, int *buffer)
 {
-	int *output = malloc(sizeof(int) * size);
 	int count[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	size_t i;
-
-	if (!output)
-		return;
 
 	i = 0;
 	while (i < size)
 	{
-		count[(array[i] / expo) % 10]++;
+		count[(array[i] / expo) % 10] += 1;
 		i++;
 	}
 
-	i = 1;
+	i = 0;
 	while (i < 10)
 	{
 		count[i] += count[i - 1];
@@ -55,7 +52,7 @@ void sort_counter(int *array, size_t size, int expo)
 	i = size - 1;
 	while ((int)i >= 0)
 	{
-		output[count[(array[i] / expo) % 10] - 1] = array[i];
+		buffer[count[(array[i] / expo) % 10] - 1] = array[i];
 		count[(array[i] / expo) % 10]--;
 		i--;
 	}
@@ -63,12 +60,9 @@ void sort_counter(int *array, size_t size, int expo)
 	i = 0;
 	while (i < size)
 	{
-		array[i] = output[i];
+		array[i] = buffer[i];
 		i++;
 	}
-
-	print_array(array, size);
-	free(output);
 }
 
 /**
@@ -88,14 +82,22 @@ void sort_counter(int *array, size_t size, int expo)
  */
 void radix_sort(int *array, size_t size)
 {
-	int expo = 1, max = get_max(array, size);
+	int *buffer, expo = 1, max = get_max(array, size);
 
 	if (!array || size < 2)
 		return;
 
+	buffer = malloc(sizeof(int) * size);
+	if (!buffer)
+		return;
+
 	while (max / expo > 0)
 	{
-		sort_counter(array, size, expo);
+		sort_counter(array, size, expo, buffer);
+		print_array(array, size);
+
 		expo *= 10;
 	}
+
+	free(buffer);
 }
