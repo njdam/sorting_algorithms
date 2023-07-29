@@ -1,5 +1,4 @@
 #include "sort.h"
-/*#include <stdint.h>*/
 
 /**
  * get_max - is a function to find the maximum integer in an array;
@@ -55,7 +54,7 @@ void sort_counter(int *array, size_t size, int expo)
 	}
 
 	i = size - 1;
-	while ((int)i >= 0) /* SIZE_MAX from stdint library */
+	while ((int)i >= 0)
 	{
 		output[count[(array[i] / expo) % 10] - 1] = array[i];
 		count[(array[i] / expo) % 10]--;
