@@ -37,10 +37,7 @@ void sort_counter(int *array, size_t size, int expo)
 	size_t i;
 
 	if (!output)
-	{
-		fprintf(stderr, "Memory allocation failed\n");
-		exit(EXIT_FAILURE);
-	}
+		return;
 
 	i = 0;
 	while (i < size)
@@ -93,6 +90,9 @@ void sort_counter(int *array, size_t size, int expo)
 void radix_sort(int *array, size_t size)
 {
 	int expo = 1, max = get_max(array, size);
+
+	if (!array || size < 2)
+		return;
 
 	while (max / expo > 0)
 	{
