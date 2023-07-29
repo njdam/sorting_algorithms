@@ -54,7 +54,7 @@ void sort_counter(int *array, size_t size, int expo)
 	}
 
 	i = size - 1;
-	while (i < SIZE_MAX) /* SIZE_MAX from stdint library */
+	while ((int)i >= 0) /* SIZE_MAX from stdint library */
 	{
 		output[count[(array[i] / expo) % 10] - 1] = array[i];
 		count[(array[i] / expo) % 10]--;
