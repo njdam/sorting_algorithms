@@ -32,13 +32,13 @@ int get_max(int *array, int size)
  */
 void sort_counter(int *array, size_t size, int expo, int *buffer)
 {
-	int count[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int count[10] = {0};
 	size_t i;
 
 	i = 0;
 	while (i < size)
 	{
-		count[(array[i] / expo) % 10] += 1;
+		count[(array[i] / expo) % 10]++;
 		i++;
 	}
 
